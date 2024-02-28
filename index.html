@@ -76,12 +76,15 @@
     </nav>
     <!-- Основной контент страницы -->
     <main class="container mx-auto px-4 py-8 flex-grow">
-        <section id="welcome" class="mb-8">
-            <div class="bg-white dark:bg-gray-700 shadow-md rounded-md p-4 space-y-3 text-center">
-                <h2 class="text-2xl font-bold mb-4">Добро пожаловать в BM Helper!</h2>
-                <p class="text-gray-700 dark:text-gray-300 text-lg">BM Helper - это инструмент для модераторов, позволяющий эффективно работать.</p>
+        <section id="welcome" class="mb-8" style="height: 550px;">
+            <div class="relative bg-white dark:bg-gray-700 shadow-md rounded-md overflow-hidden h-full">
+                <video class="absolute top-0 left-0 w-full h-full object-cover brightness-50 hidden md:block" src="src/files/master-video.mp4" frameborder="0" allowfullscreen muted autoplay loop></video>
+                <div class="absolute inset-0 flex flex-col justify-center items-center p-4 text-center text-white">
+                    <h2 class="text-5xl font-bold mb-4 text-orange-500">Добро пожаловать в BM Helper!</h2>
+                    <p class="text-gray-700 dark:text-gray-300 text-xl mt-10 underline underline-offset-4">BM Helper - это инструмент для модераторов, позволяющий эффективно работать.</p>
+                </div>
             </div>
-        </section>
+        </section>                            
         <!-- Battle Moderator Command -->
         <div class="relative flex py-5 items-center">
             <div class="flex-grow border-t border-gray-400"></div>
