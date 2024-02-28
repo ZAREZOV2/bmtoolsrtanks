@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://rawcdn.githack.com/zenorocha/clipboard.js/v2.0.11/dist/clipboard.min.js"></script>
+    <title>Violation Phrase</title>
+</head>
+<body class="bg-gray-900 text-white overflow-y-hidden">
+    <header class="bg-gray-800">
+    <!-- Header -->
+    <div class="bg-gray-800 flex flex-col md:flex-row items-center justify-between px-3">
+        <h1 class="p-3 mx-5 text-gray-300 hover:text-gray-400 font-bold text-3xl cursor-pointer"><a href="../index.html">BM Helper</a></h1>
+        <div class="flex items-center justify-center md:justify-end">
+            <a href="http://t.me/goddder" target="_blank" rel="Telegram Contact" class="text-gray-300 hover:text-gray-400 font-bold mr-3">Связаться</a>
+            <div class="relative">
+                <select id="languageSelect" onchange="changeLanguage()" class="text-gray-300 hover:text-gray-400 font-bold bg-transparent border border-transparent rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="violation-phrase.html" <?php if ($language == 'ru') echo 'selected'; ?>🇷🇺 Русский</option>
+                    <option value="violation-phrase-en.html" <?php if ($language == 'en') echo 'selected'; ?>🇬🇧 English</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    </header>
+    <div class="flex justify-center items-center h-screen">
+        <form id="violationForm" class="bg-gray-800 shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full max-w-xs">
+            <div class="mb-4">
+                <label class="block uppercase tracking-wide text-gray-300 text-xs font-bold mb-2 text-center" for="username">
+                    Никнейм нарушителя
+                </label>
+                <input class="shadow appearance-none bg-gray-700 focus:bg-gray-700 border border-gray-700 focus:border-gray-500 rounded w-full py-2 px-3 text-gray-500 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Никнейм">
+            </div>
+            <div class="w-full mb-6">
+                <label class="block uppercase tracking-wide text-gray-300 text-xs font-bold mb-2 text-center" for="violation">
+                    Причина нарушения
+                </label>
+                <div class="relative">
+                    <select class="block appearance-none w-full bg-gray-700 border border-gray-700 text-gray-500 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-gray-700 focus:border-gray-500" id="violation">
+                        <option value="battle" class="bg-gray-800">Битва с припасами</option>
+                        <option value="weapons" class="bg-gray-800">Слабое вооружение</option>
+                        <option value="upgrade" class="bg-gray-800">Прокачка</option>
+                        <option value="false_complaint" class="bg-gray-800">Ложная жалоба</option>
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-300">
+                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center justify-between">
+                <button id="submitBtn" class="w-full bg-orange-400 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+                    Отправить
+                </button>
+            </div>
+            <p class="text-center text-gray-500 text-xs mt-4">
+                &copy;2024 BM Helper by GODDDER. All rights reserved.
+            </p>
+        </form>
+        <div id="resultSection" class="hidden bg-gray-800 shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full max-w-xs">
+            <p id="resultText" class="text-gray-300 text-sm font-bold"></p>
+            <button id="copyBtn" class="mt-4 w-full bg-orange-400 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+                Скопировать текст
+            </button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('submitBtn').addEventListener('click', function() {
+            var username = document.getElementById('username').value.trim(); // Убираем начальные и конечные пробелы
+            var violation = document.getElementById('violation').value;
+            var resultText = document.getElementById('resultText');
+
+            if (!username) { // Проверяем, что username не пустое
+                alert('Пожалуйста, введите никнейм нарушителя.');
+                return; // Прерываем выполнение функции
+            }
+
+            var text = '';
+
+            switch (violation) {
+                case 'battle':
+                    text = 'Здравствуйте, уважаемый игрок ' + username + '. Вы зашли в про-битву без ЗКД (битва с припасами), это значит, что здесь игроки используют все расходники, если вы не хотите/не можете их использовать, покиньте, пожалуйста, эту битву. (в случае игнорирования данного предупреждения - мы будем вынуждены удалить вас из боя). Спасибо за понимание.';
+                    break;
+                case 'weapons':
+                    text = 'Здравствуйте, уважаемый игрок ' + username + '. Вы используете вооружение, значительно ниже по модификации, чем в вашем гараже. Пожалуйста, измените свое сочетание или покиньте этот бой (в случае игнорирования данного предупреждения - мы будем вынуждены удалить вас из боя). Спасибо за понимание.';
+                    break;
+                case 'upgrade':
+                    text = 'Здравствуйте ' + username + ', мы предупреждаем вас! Если вы продолжите заниматься прокачкой, мы будем вынуждены заблокировать вас за нарушение правил игры.';
+                    break;
+                case 'false_complaint':
+                    text = 'Уважаемый ' + username + ', если игрок вам надоедает, нажмите на его никнейм и выберите опцию игнорировать. Вы больше не будете видеть сообщения от этого игрока. Оправлять жалобу возможно только в том случае, когда в бою присутствует игрок, который нарушает правила игры (Читер/Саботаж). Ложные жалобы наказываются.';
+                    break;
+                default:
+                    text = 'Неизвестная причина нарушения';
+            }
+
+            resultText.textContent = text;
+
+            document.getElementById('violationForm').classList.add('hidden');
+            document.getElementById('resultSection').classList.remove('hidden');
+        });
+
+        document.getElementById('copyBtn').addEventListener('click', function() {
+            var resultText = document.getElementById('resultText').textContent;
+            navigator.clipboard.writeText(resultText);
+        });
+
+        // Смена языка страницы
+        function changeLanguage() {
+            var selectElement = document.getElementById("languageSelect");
+            var selectedValue = selectElement.options[selectElement.selectedIndex].value;
+            window.location.href = selectedValue;
+        }
+
+        // Определяем текущий язык по URL и выбираем соответствующий элемент в выпадающем списке
+        document.addEventListener("DOMContentLoaded", function() {
+            var currentUrl = window.location.href;
+            var languageSelect = document.getElementById("languageSelect");
+            if (currentUrl.includes("violation-phrase.html")) {
+                languageSelect.value = "violation-phrase.html";
+            } else {
+                languageSelect.value = "violation-phrase-en.html";
+            }
+        });
+    </script>
+</body>
+</html>

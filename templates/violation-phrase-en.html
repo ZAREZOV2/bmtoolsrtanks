@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://rawcdn.githack.com/zenorocha/clipboard.js/v2.0.11/dist/clipboard.min.js"></script>
+    <title>Violation Phrase</title>
+</head>
+<body class="bg-gray-900 text-white overflow-y-hidden">
+    <header class="bg-gray-800">
+    <!-- Header -->
+    <div class="bg-gray-800 flex flex-col md:flex-row items-center justify-between px-3">
+        <h1 class="p-3 mx-5 text-gray-300 hover:text-gray-400 font-bold text-3xl cursor-pointer"><a href="../en.html">BM Helper</a></h1>
+        <div class="flex items-center justify-center md:justify-end">
+            <a href="http://t.me/goddder" target="_blank" rel="Telegram Contact" class="text-gray-300 hover:text-gray-400 font-bold mr-3">Contact Me</a>
+            <div class="relative">
+                <select id="languageSelect" onchange="changeLanguage()" class="text-gray-300 hover:text-gray-400 font-bold bg-transparent border border-transparent rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="violation-phrase.html" <?php if ($language == 'ru') echo 'selected'; ?>🇷🇺 Русский</option>
+                    <option value="violation-phrase-en.html" <?php if ($language == 'en') echo 'selected'; ?>🇬🇧 English</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    </header>
+    <div class="flex justify-center items-center h-screen">
+        <form id="violationForm" class="bg-gray-800 shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full max-w-xs">
+            <div class="mb-4">
+                <label class="block uppercase tracking-wide text-gray-300 text-xs font-bold mb-2 text-center" for="username">
+                    Offender's nickname
+                </label>
+                <input class="shadow appearance-none bg-gray-700 focus:bg-gray-700 border border-gray-700 focus:border-gray-500 rounded w-full py-2 px-3 text-gray-500 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Nickname">
+            </div>
+            <div class="w-full mb-6">
+                <label class="block uppercase tracking-wide text-gray-300 text-xs font-bold mb-2 text-center" for="violation">
+                    Cause of violation
+                </label>
+                <div class="relative">
+                    <select class="block appearance-none w-full bg-gray-700 border border-gray-700 text-gray-500 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-gray-700 focus:border-gray-500" id="violation">
+                        <option value="battle" class="bg-gray-800">Battle of the supplies</option>
+                        <option value="weapons" class="bg-gray-800">Weak armament</option>
+                        <option value="upgrade" class="bg-gray-800">Leveling up</option>
+                        <option value="false_complaint" class="bg-gray-800">False complaint</option>
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-300">
+                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center justify-between">
+                <button id="submitBtn" class="w-full bg-orange-400 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+                    Send
+                </button>
+            </div>
+            <p class="text-center text-gray-500 text-xs mt-4">
+                &copy;2024 BM Helper by GODDDER. All rights reserved.
+            </p>
+        </form>
+        <div id="resultSection" class="hidden bg-gray-800 shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full max-w-xs">
+            <p id="resultText" class="text-gray-300 text-sm font-bold"></p>
+            <button id="copyBtn" class="mt-4 w-full bg-orange-400 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+                Copy text
+            </button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('submitBtn').addEventListener('click', function() {
+            var username = document.getElementById('username').value.trim(); // Убираем начальные и конечные пробелы
+            var violation = document.getElementById('violation').value;
+            var resultText = document.getElementById('resultText');
+
+            if (!username) { // Проверяем, что username не пустое
+                alert('Пожалуйста, введите никнейм нарушителя.');
+                return; // Прерываем выполнение функции
+            }
+
+            var text = '';
+
+            switch (violation) {
+                case 'battle':
+                    text = 'Hello, dear player ' + username + '. You entered a pro-battle without ZKD (battle with supplies), it means that here players use all consumables, if you dont want/cant use them, please leave this battle. (If you ignore this warning - we will be forced to remove you from the battle). Thank you for your understanding.';
+                    break;
+                case 'weapons':
+                    text = 'Hello, dear player ' + username + '. You are using weapons that are significantly lower in modification than those in your garage. Please change your combination or leave this battle (if you ignore this warning - we will be forced to remove you from the battle). Thank you for your understanding.';
+                    break;
+                case 'upgrade':
+                    text = 'Hello ' + username + ', we warn you! If you continue Leveling up, we will be forced to block you for violating the game rules.';
+                    break;
+                case 'false_complaint':
+                    text = 'Dear ' + username + ', if you are fed up with a player, click on their nickname and select the ignore option. You will no longer see messages from this player. You can only file a complaint if there is a player in the battle who violates the game rules (Cheater/Sabotage). False complaints will be penalized.';
+                    break;
+                default:
+                    text = 'Unknown cause of the violation';
+            }
+
+            resultText.textContent = text;
+
+            document.getElementById('violationForm').classList.add('hidden');
+            document.getElementById('resultSection').classList.remove('hidden');
+        });
+
+        document.getElementById('copyBtn').addEventListener('click', function() {
+            var resultText = document.getElementById('resultText').textContent;
+            navigator.clipboard.writeText(resultText);
+        });
+
+        // Смена языка страницы
+        function changeLanguage() {
+            var selectElement = document.getElementById("languageSelect");
+            var selectedValue = selectElement.options[selectElement.selectedIndex].value;
+            window.location.href = selectedValue;
+        }
+
+        // Определяем текущий язык по URL и выбираем соответствующий элемент в выпадающем списке
+        document.addEventListener("DOMContentLoaded", function() {
+            var currentUrl = window.location.href;
+            var languageSelect = document.getElementById("languageSelect");
+            if (currentUrl.includes("violation-phrase-en.html")) {
+                languageSelect.value = "violation-phrase-en.html";
+            } else {
+                languageSelect.value = "violation-phrase.html";
+            }
+        });
+    </script>
+</body>
+</html>

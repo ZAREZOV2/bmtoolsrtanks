@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BM Helper | Beta</title>
+    <!-- Подключение стилей -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="src/css/style.css">
+</head>
+
+<body class="flex flex-col min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-300">
+    <!-- Шапка сайта -->
+    <header class="bg-gray-900 dark:bg-gray-800 text-white py-4">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <h1 class="text-3xl font-bold"><a href="#" class="hover:text-gray-300">BM Helper</a></h1>
+            <!-- Выбор языка и темы -->
+            <div class="flex h-full items-center">
+                <div class="ml-auto">
+                    <select id="languageSelect" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+                        <option value="ru">Русский</option>
+                        <option value="en" selected>English</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Навигация -->
+    <nav class="bg-gray-700 text-white py-2 md:hidden">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <h1 class="text-lg font-bold">Меню</h1>
+            <!-- Гамбургер-меню для мобильных устройств -->
+            <button class="bg-gray-700 text-white px-4 py-2 rounded-md hover:bg-gray-600" id="burgerBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <!-- Список ссылок для мобильных устройств -->
+        <div class="hidden" id="mobileNav">
+            <a href="#commands-battle" class="block py-2 px-4 hover:bg-gray-600">Battle Moderator commands</a>
+            <a href="#commands-chat" class="block py-2 px-4 hover:bg-gray-600">Chat Moderator commands</a>
+            <a href="#faq" class="block py-2 px-4 hover:bg-gray-600">FAQ</a>
+            <a href="templates/violation-phrase.html" class="block py-2 px-4 hover:bg-gray-600">Phrases</a>
+            <a href="#" class="block py-2 px-4 hover:bg-gray-600">Logs</a>
+            <a href="https://discordapp.com/users/645949087648186427/" class="block py-2 px-4 hover:bg-gray-600">Developer</a>
+            <a href="https://discordapp.com/users/842037871309488178/" class="block py-2 px-4 hover:bg-gray-600">Administrator</a>
+        </div>
+    </nav>
+    <!-- Список ссылок для ПК -->
+    <nav class="bg-gray-700 text-white py-2 hidden md:block">
+        <div class="container mx-auto px-4 flex justify-center">
+            <div class="dropdown">
+                <a href="#" class="mr-6 hover:text-gray-300">Sections</a>
+                <div class="dropdown-menu">
+                    <a href="#commands-battle">Battle Moderator commands</a>
+                    <a href="#commands-chat">Chat Moderator commands</a>
+                    <a href="#faq">FAQ</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <a href="#" class="mr-6 hover:text-gray-300">Services</a>
+                <div class="dropdown-menu">
+                    <a href="templates/violation-phrase.html">Phrases</a>
+                    <a href="#">Logs</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <a href="#" class="hover:text-gray-300">Contacts</a>
+                <div class="dropdown-menu">
+                    <a href="https://discordapp.com/users/645949087648186427/">Developer</a>
+                    <a href="https://discordapp.com/users/842037871309488178/">Administrators</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- Основной контент страницы -->
+    <main class="container mx-auto px-4 py-8 flex-grow">
+        <section id="welcome" class="mb-8">
+            <div class="bg-white dark:bg-gray-700 shadow-md rounded-md p-4 space-y-3 text-center">
+                <h2 class="text-2xl font-bold mb-4">Welcome to BM Helper!</h2>
+                <p class="text-gray-700 dark:text-gray-300 text-lg">BM Helper - is a tool for moderators to work efficiently.</p>
+            </div>
+        </section>
+        <!-- Battle Moderator Command -->
+        <div class="relative flex py-5 items-center">
+            <div class="flex-grow border-t border-gray-400"></div>
+        </div>
+        <section id="commands-battle" class="mb-8 space-y-5">
+            <h2 class="text-2xl font-bold mb-4 text-orange-500">Battle moderator commands</h2>
+            <p class="text-gray-700 dark:text-gray-300">* Numbers indicate the reason for blocking. The table shows how to <span class="text-sky-500">{reason}</span>:</p>
+            <ul class="space-y-2 mx-5">
+                <li>0 - standard reason;</li>
+                <li>1 - nickname;</li>
+                <li>2 - for using cheats;</li>
+                <li>3 - account transfer;</li>
+                <li>4 - powerleveling;</li>
+                <li>5 - bug usage;</li>
+                <li>6 - sabotage;</li>
+            </ul>
+            <p class="text-gray-700 dark:text-gray-300">* Make sure that both of these commands, /rbattle and /fbattle, are written without a <span class="text-orange-500">#/battle=</span>  in the link, otherwise they won't work!</p>
+            <div class="bg-gray-400 dark:bg-gray-700 shadow-md rounded-md overflow-x-auto">
+                <table class="table-auto w-full">
+                    <thead>
+                        <tr class="bg-gray-400 dark:bg-gray-600">
+                            <th class="border border-gray-500 px-4 py-2 w-1/4">Command</th>
+                            <th class="border border-gray-500 px-4 py-2 w-1/2">Description</th>
+                            <th class="border border-gray-500 px-4 py-2 w-1/4">Usage</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/w {nickname} {reason}</td>
+                            <td class="border border-gray-500 px-4 py-2">Chat warn for false complaint (The reason is specified manually)</td>
+                            <td class="border border-gray-500 px-4 py-2">/w @username False Complaint</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/kick {nickname}</td>
+                            <td class="border border-gray-500 px-4 py-2">We use that to kick player from the battle</td>
+                            <td class="border border-gray-500 px-4 py-2">/kick @username</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/blockhour {nickname} {reason}</td>
+                            <td class="border border-gray-500 px-4 py-2">Block player for a hour</td>
+                            <td class="border border-gray-500 px-4 py-2">/blockhour @username 0</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/blockday {nickname} {reason}</td>
+                            <td class="border border-gray-500 px-4 py-2">Block player for a day</td>
+                            <td class="border border-gray-500 px-4 py-2">/blockday @username 0</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/blockweek {nickname} {reason}</td>
+                            <td class="border border-gray-500 px-4 py-2">Block player for a week</td>
+                            <td class="border border-gray-500 px-4 py-2">/blockweek @username 0</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/blockmonth {nickname} {reason}</td>
+                            <td class="border border-gray-500 px-4 py-2">Block player for a month</td>
+                            <td class="border border-gray-500 px-4 py-2">/blockmonth @username 0</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/blockgameforever {nickname} {reason}</td>
+                            <td class="border border-gray-500 px-4 py-2">Block player <span class="text-red-500">FOREVER</span></td>
+                            <td class="border border-gray-500 px-4 py-2">/blockgameforever @username 2</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/unblockgame {nickname}</td>
+                            <td class="border border-gray-500 px-4 py-2">Unblock player's account</td>
+                            <td class="border border-gray-500 px-4 py-2">/unblockgame @username</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/unbanip {ip/nickname}</td>
+                            <td class="border border-gray-500 px-4 py-2">Unban player's IP</td>
+                            <td class="border border-gray-500 px-4 py-2">/unbanip 192.168.1.1/username</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/karma {nickname}</td>
+                            <td class="border border-gray-500 px-4 py-2">Check player's karma</td>
+                            <td class="border border-gray-500 px-4 py-2">/karma @username</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/battleinfo {battle-url}</td>
+                            <td class="border border-gray-500 px-4 py-2">Information about battle creator</td>
+                            <td class="border border-gray-500 px-4 py-2">/battleinfo 2aaaaab461adc636</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/search {nickname}</td>
+                            <td class="border border-gray-500 px-4 py-2">Check if player is online and provides battle like (NOTE: command works only in lobby chat)</td>
+                            <td class="border border-gray-500 px-4 py-2">/search @username</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/fbattle {battle-url}</td>
+                            <td class="border border-gray-500 px-4 py-2">Command finishes battle (Example: <span class="font-mono text-orange-400">/fbattle 2aaaaab461adc636</span>)</td>
+                            <td class="border border-gray-500 px-4 py-2">/fbattle 2aaaaab461adc636</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/rbattle {battle-url}</td>
+                            <td class="border border-gray-500 px-4 py-2">Command deletes battle (Example: <span class="font-mono text-orange-400">/rbattle 2aaaaab461adc636</span>)</td>
+                            <td class="border border-gray-500 px-4 py-2">/rbattle 2aaaaab461adc636</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/mults {nickname}</td>
+                            <td class="border border-gray-500 px-4 py-2">Checks alternative (mult) accounts of player</td>
+                            <td class="border border-gray-500 px-4 py-2">/mults @username</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/banip {ip/nickname}</td>
+                            <td class="border border-gray-500 px-4 py-2">IP bans account</td>
+                            <td class="border border-gray-500 px-4 py-2">/banip 192.168.1.1/username</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/banminutes {nickname} [False Complaint]</td>
+                            <td class="border border-gray-500 px-4 py-2">We use that in case that player keeps using /vote command without reason, it chat bans player for 5 minutes</td>
+                            <td class="border border-gray-500 px-4 py-2">/banminutes @username False Complaint</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/banhour {nickname} {reason}</td>
+                            <td class="border border-gray-500 px-4 py-2">We use that in case that player keeps using /vote command without reason, it chat bans player for one hour</td>
+                            <td class="border border-gray-500 px-4 py-2">/banhour @username False Complaint</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/comps</td>
+                            <td class="border border-gray-500 px-4 py-2">Checks complaints (votes) in battle</td>
+                            <td class="border border-gray-500 px-4 py-2">/comps</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/done</td>
+                            <td class="border border-gray-500 px-4 py-2">Close complaint (The moderator's review of complaints has been completed)</td>
+                            <td class="border border-gray-500 px-4 py-2">/done</td>
+                        </tr>
+                    </tbody>
+                </table>                
+            </div>
+        </section>
+        <!-- Chat Moderator Command -->
+        <div class="relative flex py-5 items-center">
+            <div class="flex-grow border-t border-gray-400"></div>
+        </div>
+        <section id="commands-chat" class="mb-8">
+            <h2 class="text-2xl font-bold mb-4 text-orange-500">Chat moderator commands</h2>
+            <div class="bg-white dark:bg-gray-700 shadow-md rounded-md overflow-x-auto">
+                <table class="table-auto w-full">
+                    <thead>
+                        <tr class="bg-gray-200 dark:bg-gray-600">
+                            <th class="border border-gray-500 px-4 py-2 w-1/4">Command</th>
+                            <th class="border border-gray-500 px-4 py-2 w-1/2">Description</th>
+                            <th class="border border-gray-500 px-4 py-2 w-1/4">Usage</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/start</td>
+                            <td class="border border-gray-500 px-4 py-2">Start chat</td>
+                            <td class="border border-gray-500 px-4 py-2">/start</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/stop</td>
+                            <td class="border border-gray-500 px-4 py-2">Stop chat</td>
+                            <td class="border border-gray-500 px-4 py-2">/stop</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/clear</td>
+                            <td class="border border-gray-500 px-4 py-2">Clears the entire lobby chat</td>
+                            <td class="border border-gray-500 px-4 py-2">/clear</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/online</td>
+                            <td class="border border-gray-500 px-4 py-2">Shows the current number of players which are online</td>
+                            <td class="border border-gray-500 px-4 py-2">/online</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/w {nickname} {reason}</td>
+                            <td class="border border-gray-500 px-4 py-2">Issue a warning</td>
+                            <td class="border border-gray-500 px-4 py-2">/w @username False complaint</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/banminutes {nickname} {reason}</td>
+                            <td class="border border-gray-500 px-4 py-2">Bans player for 5 minutes</td>
+                            <td class="border border-gray-500 px-4 py-2">/banminutes @username False complaint</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/banhour {nickname} {reason}</td>
+                            <td class="border border-gray-500 px-4 py-2">Bans player for ONE HOUR</td>
+                            <td class="border border-gray-500 px-4 py-2">/banhour @username False complaint</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/banday {nickname} {reason}</td>
+                            <td class="border border-gray-500 px-4 py-2">Bans player for DAY</td>
+                            <td class="border border-gray-500 px-4 py-2">/banday @username False complaint</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/banweek {nickname} {reason}</td>
+                            <td class="border border-gray-500 px-4 py-2">Bans player for WEEK</td>
+                            <td class="border border-gray-500 px-4 py-2">/banweek @username False complaint</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/banmonth {nickname} {reason}</td>
+                            <td class="border border-gray-500 px-4 py-2">Bans player for MONTH</td>
+                            <td class="border border-gray-500 px-4 py-2">/banmonth @username False complaint</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/banhalfyear {nickname} {reason}</td>
+                            <td class="border border-gray-500 px-4 py-2">Bans player for HALF YEAR</td>
+                            <td class="border border-gray-500 px-4 py-2">/banhalfyear @username False complaint</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/banforever {nickname} {reason}</td>
+                            <td class="border border-gray-500 px-4 py-2">Bans player <span class="text-red-500">FOREVER</span></td>
+                            <td class="border border-gray-500 px-4 py-2">/banforever @username Insulting GODDDER</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/unban {nickname}</td>
+                            <td class="border border-gray-500 px-4 py-2">Unbans player's chat</td>
+                            <td class="border border-gray-500 px-4 py-2">/unban @username</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/clean {nickname}</td>
+                            <td class="border border-gray-500 px-4 py-2">Deletes all player's messages in lobby chat</td>
+                            <td class="border border-gray-500 px-4 py-2">/clean @username</td>
+                        </tr>
+                    </tbody>
+                </table>                                               
+            </div>
+        </section>
+        <!-- FAQ -->
+        <div class="relative flex py-5 items-center">
+            <div class="flex-grow border-t border-gray-400"></div>
+        </div>
+        <section id="faq" class="mb-8">
+            <h2 class="text-2xl font-bold mb-4 text-orange-500">FAQ</h2>
+            <div class="bg-white dark:bg-gray-700 shadow-md rounded-md p-4 text-wrap space-y-3">
+                <h3 class="text-xl font-bold mb-2 text-orange-500">How to identify a cheater?</h3>
+                <p class="text-gray-700 dark:text-gray-300">Any clear evidence of player cheating leads to eternal lockout.</p>
+                <p class="text-gray-700 dark:text-gray-300">The category of clear evidence includes:</p>
+                <ul class="list-disc pl-8 mt-2 space-y-3">
+                    <li class="font-bold text-sky-500">Fly hack/jump hack</li>
+                    <p class="mt-3 text-gray-300">Most often this can be found on parkour battles or holiday battles, where players most often use this cheat to catch gold boxes. One clean moment is enough to block a player FOREVER!</p>
+                    <li class="font-bold text-sky-500">Auto aim</li>
+                    <p class="mt-3 text-gray-300">Mostly used during parkour fights for striker turret. Key moments for detecting this hack: Following player's striker laser - if player managed to shot 4 rockets without aiming at enemy - it is considered as hack. For this kind of hack evidence, it is better to have multiple clips of it. This hack leads to the FOREVER BLOCK!</p>
+                    <li class="font-bold text-sky-500">Unflip hack</li>
+                    <p class="mt-3 text-gray-300">As in the case of Fly hack, one clear moment is enough to block the player FOREVER! The moment can be understood as the moment when the player's tank is completely flipped, and he manages to turn over himself without getting any impact from his turret/opponent's turret.</p>
+                    <li class="font-bold text-sky-500">Speed cheat</li>
+                    <p class="mt-3 text-gray-300">Speed hack - a type of hack which drastically increases your movement speed. There are many kinds of speed hacks, some of them are easily detected (player's tank is as fast as with crisis drone), but some of them are kindly harder. The best way how to spot a speed hacker is to follow his tank. An example: if the player uses hornet m3, and he is as fast (or even faster) as the user who plays with wasp m3, then it is enough evidence to block him. For that hack we block user FOREVER!</p>
+                    <li class="font-bold text-sky-500">No recoil</li>
+                    <p class="mt-3 text-gray-300">It is used mainly in XP/BP mode. This cheat can be easily detected by watching the player's railgun shots. Any impact the hacker receives from the player has no effect on his aim or tank. For this type of hack, it is best to take a multiple clips of player. For no recoil hack, we block FOREVER.</p>
+                    <li class="font-bold text-sky-500">Vertical hack</li>
+                    <p class="mt-3 text-gray-300">Used mostly in XP/BP battles. How to spot this hack: You should follow player's shots, if he hits enemy from higher places without leaning down his tank then it is considered as hack. A good example are Sandbox/Garder maps, in which it is impossible to hit a player who stands under the wall without leaning down your tank. For this kind of hack, it is better to collect multiple moments. This hack leads to FOREVER block of account.</p>
+                    <li class="font-bold text-sky-500">Ignore textures</li>
+                    <p class="mt-3 text-gray-300">Action in which the player drives through tanks belongs to the category ignore textures. In some cases, it might be hard to detect if a player uses cheats or his ping is too high, that's why we need to gather multiple moments before blocking a user.  For this kind of hack, we block user for a MONTH! </p>
+                    <li class="font-bold text-sky-500">No reload</li>
+                    <p class="mt-3 text-gray-300">This hack is mostly used in parkour battles. It's easily noticeable, because player shots constantly without reloading. For this hack, we block player FOREVER!</p>
+                    <li class="font-bold text-sky-500">Gravity hack</li>
+                    <p class="mt-3 text-gray-300">Gravity hack is similar to jump hack, but with small differences. It involves reducing or eliminating the effects of gravity, allowing the player to jump higher, fall slower, or even fly. For that kind of hack, we block player FOREVER.</p>
+                </ul>
+            </div>
+        </section>
+    </main>
+    <!-- Подвал сайта -->
+    <footer class="bg-gray-900 dark:bg-gray-800 text-white py-4">
+        <div class="container mx-auto px-4">
+            <p class="text-center">&copy; 2024 BM Helper. All rights reserved.</p>
+        </div>
+    </footer>
+    <!-- Кнопка "Вверх" -->
+    <button onclick="window.scrollTo(0, 0)" class="fixed bottom-4 right-4 bg-blue-500 text-white px-4 py-2 rounded-full shadow-md hover:bg-blue-600">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Скрипты -->
+    <script>
+        // Обработка смены языка
+        document.getElementById('languageSelect').addEventListener('change', function() {
+            var selectedLanguage = this.value;
+            if (selectedLanguage === 'ru') {
+                window.location.href = 'index.html';
+            }
+        });
+
+        // Скрипт для открытия/закрытия гамбургер-меню
+        document.getElementById('burgerBtn').addEventListener('click', function() {
+            var mobileNav = document.getElementById('mobileNav');
+            mobileNav.classList.toggle('hidden');
+        });
+    </script>
+</body>
+
+</html>

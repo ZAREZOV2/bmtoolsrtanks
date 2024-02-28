@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BM Helper | Beta</title>
+    <!-- Подключение стилей -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="src/css/style.css">
+</head>
+
+<body class="flex flex-col min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-300">
+    <!-- Шапка сайта -->
+    <header class="bg-gray-900 dark:bg-gray-800 text-white py-4">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <h1 class="text-3xl font-bold"><a href="#" class="hover:text-gray-300">BM Helper</a></h1>
+            <!-- Выбор языка и темы -->
+            <div class="flex h-full items-center">
+                <div class="ml-auto">
+                    <select id="languageSelect" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+                        <option value="ru" selected>Русский</option>
+                        <option value="en">English</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Навигация -->
+    <nav class="bg-gray-700 text-white py-2 md:hidden">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <h1 class="text-lg font-bold">Меню</h1>
+            <!-- Гамбургер-меню для мобильных устройств -->
+            <button class="bg-gray-700 text-white px-4 py-2 rounded-md hover:bg-gray-600" id="burgerBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <!-- Список ссылок для мобильных устройств -->
+        <div class="hidden" id="mobileNav">
+            <a href="#commands-battle" class="block py-2 px-4 hover:bg-gray-600">Команды модератора битв</a>
+            <a href="#commands-chat" class="block py-2 px-4 hover:bg-gray-600">Команды модератора чата</a>
+            <a href="#faq" class="block py-2 px-4 hover:bg-gray-600">FAQ</a>
+            <a href="templates/violation-phrase.html" class="block py-2 px-4 hover:bg-gray-600">Фразы</a>
+            <a href="#" class="block py-2 px-4 hover:bg-gray-600">Логи</a>
+            <a href="https://discordapp.com/users/645949087648186427/" class="block py-2 px-4 hover:bg-gray-600">Разработчик</a>
+            <a href="https://discordapp.com/users/842037871309488178/" class="block py-2 px-4 hover:bg-gray-600">Администратор</a>
+        </div>
+    </nav>
+    <!-- Список ссылок для ПК -->
+    <nav class="bg-gray-700 text-white py-2 hidden md:block">
+        <div class="container mx-auto px-4 flex justify-center">
+            <div class="dropdown">
+                <a href="#" class="mr-6 hover:text-gray-300">Разделы</a>
+                <div class="dropdown-menu">
+                    <a href="#commands-battle">Команды модератора битв</a>
+                    <a href="#commands-chat">Команды модератора чата</a>
+                    <a href="#faq">FAQ</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <a href="#" class="mr-6 hover:text-gray-300">Сервисы</a>
+                <div class="dropdown-menu">
+                    <a href="templates/violation-phrase.html">Фразы</a>
+                    <a href="#">Логи</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <a href="#" class="hover:text-gray-300">Контакты</a>
+                <div class="dropdown-menu">
+                    <a href="https://discordapp.com/users/645949087648186427/">Разработчик</a>
+                    <a href="https://discordapp.com/users/842037871309488178/">Администратор</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- Основной контент страницы -->
+    <main class="container mx-auto px-4 py-8 flex-grow">
+        <section id="welcome" class="mb-8">
+            <div class="bg-white dark:bg-gray-700 shadow-md rounded-md p-4 space-y-3 text-center">
+                <h2 class="text-2xl font-bold mb-4">Добро пожаловать в BM Helper!</h2>
+                <p class="text-gray-700 dark:text-gray-300 text-lg">BM Helper - это инструмент для модераторов, позволяющий эффективно работать.</p>
+            </div>
+        </section>
+        <!-- Battle Moderator Command -->
+        <div class="relative flex py-5 items-center">
+            <div class="flex-grow border-t border-gray-400"></div>
+        </div>
+        <section id="commands-battle" class="mb-8 space-y-5">
+            <h2 class="text-2xl font-bold mb-4 text-orange-500">Команды модератора битвы</h2>
+            <p class="text-gray-700 dark:text-gray-300">* Цифры указывают на причину блокировки. В таблице указано как <span class="text-sky-500">{reason}</span>:</p>
+            <ul class="space-y-2 mx-5">
+                <li>0 - стандартная причина;</li>
+                <li>1 - никнейм;</li>
+                <li>2 - за использование читов;</li>
+                <li>3 - передача аккаунта;</li>
+                <li>4 - прокачка;</li>
+                <li>5 - багоюз;</li>
+                <li>6 - саботаж;</li>
+            </ul>
+            <p class="text-gray-700 dark:text-gray-300">* Убедитесь, что обе эти команды - /rbattle и /fbattle - написаны без <span class="text-orange-500">#/battle=</span> в ссылке, иначе они не будут работать!</p>
+            <div class="bg-gray-400 dark:bg-gray-700 shadow-md rounded-md overflow-x-auto">
+                <table class="table-auto w-full">
+                    <thead>
+                        <tr class="bg-gray-400 dark:bg-gray-600">
+                            <th class="border border-gray-500 px-4 py-2 w-1/4">Команда</th>
+                            <th class="border border-gray-500 px-4 py-2 w-1/2">Описание</th>
+                            <th class="border border-gray-500 px-4 py-2 w-1/4">Использование</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/w {nickname} {reason}</td>
+                            <td class="border border-gray-500 px-4 py-2">Предупреждение в чате за ложную жалобу (Причина указывается вручную)</td>
+                            <td class="border border-gray-500 px-4 py-2">/w @username Ложная жалоба</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/kick {nickname}</td>
+                            <td class="border border-gray-500 px-4 py-2">Исключить игрока из боя</td>
+                            <td class="border border-gray-500 px-4 py-2">/kick @username</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/blockhour {nickname} {reason}</td>
+                            <td class="border border-gray-500 px-4 py-2">Заблокировать игрока на час</td>
+                            <td class="border border-gray-500 px-4 py-2">/blockhour @username 0</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/blockday {nickname} {reason}</td>
+                            <td class="border border-gray-500 px-4 py-2">Заблокировать игрока на день</td>
+                            <td class="border border-gray-500 px-4 py-2">/blockday @username 0</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/blockweek {nickname} {reason}</td>
+                            <td class="border border-gray-500 px-4 py-2">Заблокировать игрока на неделю</td>
+                            <td class="border border-gray-500 px-4 py-2">/blockweek @username 0</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/blockmonth {nickname} {reason}</td>
+                            <td class="border border-gray-500 px-4 py-2">Заблокировать игрока на месяц</td>
+                            <td class="border border-gray-500 px-4 py-2">/blockmonth @username 0</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/blockgameforever {nickname} {reason}</td>
+                            <td class="border border-gray-500 px-4 py-2">Заблокировать игрока <span class="text-red-500 font-bold">НАВСЕГДА</span></td>
+                            <td class="border border-gray-500 px-4 py-2">/blockgameforever @username 2</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/unblockgame {nickname}</td>
+                            <td class="border border-gray-500 px-4 py-2">Разблокировать аккаунт игрока</td>
+                            <td class="border border-gray-500 px-4 py-2">/unblockgame @username</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/unbanip {ip/nickname}</td>
+                            <td class="border border-gray-500 px-4 py-2">Разблокировать IP-адрес игрока</td>
+                            <td class="border border-gray-500 px-4 py-2">/unbanip 192.168.1.1/username</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/karma {nickname}</td>
+                            <td class="border border-gray-500 px-4 py-2">Проверьте карму игрока</td>
+                            <td class="border border-gray-500 px-4 py-2">/karma @username</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/battleinfo {battle-url}</td>
+                            <td class="border border-gray-500 px-4 py-2">Информация о создателе битвы</td>
+                            <td class="border border-gray-500 px-4 py-2">/battleinfo 2aaaaab461adc636</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/search {nickname}</td>
+                            <td class="border border-gray-500 px-4 py-2">Проверьте, находится ли игрок в сети, и находится ли он в битве (ПРИМЕЧАНИЕ: команда работает только в чате лобби)</td>
+                            <td class="border border-gray-500 px-4 py-2">/search @username</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/fbattle {battle-url}</td>
+                            <td class="border border-gray-500 px-4 py-2">Команда завершает битву (Например: <span class="font-mono text-orange-400">/fbattle 2aaaaab461adc636</span>) </td>
+                            <td class="border border-gray-500 px-4 py-2">/fbattle 2aaaaab461adc636</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/rbattle {battle-url}</td>
+                            <td class="border border-gray-500 px-4 py-2">Команда удаляет битву (Например: <span class="font-mono text-orange-400">/rbattle 2aaaaab461adc636</span>)</td>
+                            <td class="border border-gray-500 px-4 py-2">/rbattle 2aaaaab461adc636</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/mults {nickname}</td>
+                            <td class="border border-gray-500 px-4 py-2">Проверяет альтернативные аккаунты игрока (мульты)</td>
+                            <td class="border border-gray-500 px-4 py-2">/mults @username</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/banip {ip/nickname}</td>
+                            <td class="border border-gray-500 px-4 py-2">Заблокировать IP-адрес игрока</td>
+                            <td class="border border-gray-500 px-4 py-2">/banip 192.168.1.1/username</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/banminutes {nickname} {reason}</td>
+                            <td class="border border-gray-500 px-4 py-2">Мы используем это в случае, если игрок продолжает использовать команду /vote без причины, она банит игрока в чате на 5 минут</td>
+                            <td class="border border-gray-500 px-4 py-2">/banminutes @username Ложная жалоба</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/banhour {nickname} {reason}</td>
+                            <td class="border border-gray-500 px-4 py-2">Мы используем это в случае, если игрок продолжает использовать команду /vote без причины, она банит игрока в чате на один час</td>
+                            <td class="border border-gray-500 px-4 py-2">/banhour @username Ложная жалоба</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/comps</td>
+                            <td class="border border-gray-500 px-4 py-2">Проверяет жалобы (голоса) в бою</td>
+                            <td class="border border-gray-500 px-4 py-2">/comps</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/done</td>
+                            <td class="border border-gray-500 px-4 py-2">Закрывает жалобу (Разбор жалоб модератором завершён)</td>
+                            <td class="border border-gray-500 px-4 py-2">/done</td>
+                        </tr>
+                    </tbody>
+                </table>                
+            </div>
+        </section>
+        <div class="relative flex py-5 items-center">
+            <div class="flex-grow border-t border-gray-400"></div>
+        </div>
+        <!-- Chat Moderator Command -->
+        <section id="commands-chat" class="mb-8">
+            <h2 class="text-2xl font-bold mb-4 text-orange-500">Команды модератора чата</h2>
+            <div class="bg-white dark:bg-gray-700 shadow-md rounded-md overflow-x-auto">
+                <table class="table-auto w-full">
+                    <thead>
+                        <tr class="bg-gray-200 dark:bg-gray-600">
+                            <th class="border border-gray-500 px-4 py-2 w-1/4">Команда</th>
+                            <th class="border border-gray-500 px-4 py-2 w-1/2">Описание</th>
+                            <th class="border border-gray-500 px-4 py-2 w-1/4">Использование</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/start</td>
+                            <td class="border border-gray-500 px-4 py-2">Запустить чат</td>
+                            <td class="border border-gray-500 px-4 py-2">/start</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/stop</td>
+                            <td class="border border-gray-500 px-4 py-2">Остановить чат</td>
+                            <td class="border border-gray-500 px-4 py-2">/stop</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/clear</td>
+                            <td class="border border-gray-500 px-4 py-2">Очищает весь чат лобби</td>
+                            <td class="border border-gray-500 px-4 py-2">/clear</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/online</td>
+                            <td class="border border-gray-500 px-4 py-2">Показывает текущее количество игроков, которые находятся онлайн</td>
+                            <td class="border border-gray-500 px-4 py-2">/online</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/w {nickname} {reason}</td>
+                            <td class="border border-gray-500 px-4 py-2">Вынести предупреждение</td>
+                            <td class="border border-gray-500 px-4 py-2">/w @username Ложная жалоба</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/banminutes {nickname} {reason}</td>
+                            <td class="border border-gray-500 px-4 py-2">Выдать бан игроку на 5 минут</td>
+                            <td class="border border-gray-500 px-4 py-2">/banminutes @username Ложная жалоба</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/banhour {nickname} {reason}</td>
+                            <td class="border border-gray-500 px-4 py-2">Выдать бан игроку на ЧАС</td>
+                            <td class="border border-gray-500 px-4 py-2">/banhour @username Ложная жалоба</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/banday {nickname} {reason}</td>
+                            <td class="border border-gray-500 px-4 py-2">Выдать бан игроку на ДЕНЬ</td>
+                            <td class="border border-gray-500 px-4 py-2">/banday @username Ложная жалоба</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/banweek {nickname} {reason}</td>
+                            <td class="border border-gray-500 px-4 py-2">Выдать бан игроку на НЕДЕЛЮ</td>
+                            <td class="border border-gray-500 px-4 py-2">/banweek @username Ложная жалоба</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/banmonth {nickname} {reason}</td>
+                            <td class="border border-gray-500 px-4 py-2">Выдать бан игроку на МЕСЯЦ</td>
+                            <td class="border border-gray-500 px-4 py-2">/banmonth @username Ложная жалоба</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/banhalfyear {nickname} {reason}</td>
+                            <td class="border border-gray-500 px-4 py-2">Выдать бан игроку на ПОЛГОДА</td>
+                            <td class="border border-gray-500 px-4 py-2">/banhalfyear @username Ложная жалоба</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/banforever {nickname} {reason}</td>
+                            <td class="border border-gray-500 px-4 py-2">Выдать бан игроку <span class="text-red-500 font-bold">НАВСЕГДА</span></td>
+                            <td class="border border-gray-500 px-4 py-2">/banforever @username Ложная жалоба</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/unban {nickname}</td>
+                            <td class="border border-gray-500 px-4 py-2">Разблокировать чат игрока</td>
+                            <td class="border border-gray-500 px-4 py-2">/unban @username</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2">/clean {nickname}</td>
+                            <td class="border border-gray-500 px-4 py-2">Удаляет все сообщения игрока в лобби-чате</td>
+                            <td class="border border-gray-500 px-4 py-2">/clean @username</td>
+                        </tr>
+                    </tbody>
+                </table>                                               
+            </div>
+        </section>
+        <!-- FAQ -->
+        <div class="relative flex py-5 items-center">
+            <div class="flex-grow border-t border-gray-400"></div>
+        </div>
+        <section id="faq" class="mb-8">
+            <h2 class="text-2xl font-bold mb-4 text-orange-500">FAQ</h2>
+            <div class="bg-white dark:bg-gray-700 shadow-md rounded-md p-4 text-wrap space-y-3">
+                <h3 class="text-xl font-bold mb-2 text-orange-500">Как определить читера?</h3>
+                <p class="text-gray-700 dark:text-gray-300">Любое явное доказательство читерства игрока ведет к вечной блокировке.</p>
+                <p class="text-gray-700 dark:text-gray-300">К категории явных доказательств принадлежит:</p>
+                <ul class="list-disc pl-8 mt-2 space-y-3">
+                    <li class="font-bold text-sky-500">Чит на полёт/прыжок</li>
+                    <p class="mt-3 text-gray-300">Чаще всего такое можете встретить на паркур-битвах или праздничных битвах, где игроки чаще всего пользуются этим читом для ловли золотых ящиков. Даже одного явного момента достаточно, чтобы заблокировать игрока НАВСЕГДА!</p>
+                    <li class="font-bold text-sky-500">Автоматическая наводка</li>
+                    <p class="mt-3 text-gray-300">В основном используется во время паркурных боев для пушки страйкер. Ключевые моменты для обнаружения этого хака: Слежение за лазером игрока - если игрок успел выстрелить 4 ракеты, не целясь по врагу - это считается читом. Для доказательства этого вида чита лучше иметь несколько моментов. За этот чит блокируем НАВСЕГДА!</p>
+                    <li class="font-bold text-sky-500">Переворот из минуса</li>
+                    <p class="mt-3 text-gray-300">Как и в случае с Fly hack, достаточно одного четкого момента, чтобы заблокировать игрока НАВСЕГДА! Момент можно понимать как момент, когда танк игрока полностью перевернулся, и ему удается перевернуться самому, не получив никакой отдачи от своей пушки/пушки соперника.</p>
+                    <li class="font-bold text-sky-500">Чит на скорость</li>
+                    <p class="mt-3 text-gray-300">Speed hack - это вид чита, который резко увеличивает скорость вашего движения. Существует множество видов читов для увеличения скорости, некоторые из них легко заметить, но некоторые из них гораздо сложнее. Лучший способ как заметить хакера - следить за его танком. Пример: если игрок использует хорнет м3, и он такой же быстрый (или даже быстрее), как и игрок, играющий с васпом м3, то это железное доказательство для того, чтобы заблокировать его. За этот вид чита мы блокируем игрока НАВСЕГДА!</p>
+                    <li class="font-bold text-sky-500">Анти-отдача</li>
+                    <p class="mt-3 text-gray-300">Используется в основном игроками режима XP/BP. Этот чит можно леко заметить, наблюдая за выстрелами рельсы игрока. Любой удар, который хакер получит от игрока, никак не влияет на его попадание или танк. Для этого типа чита лучше снять несколько моментов. За антиотдачу блокируем НАВСЕГДА.</p>
+                    <li class="font-bold text-sky-500">Вертикальная наводка прицела</li>
+                    <p class="mt-3 text-gray-300">Используется в основном в боях XP/BP. Как заметить этот чит: Вы должны следить за выстрелами игрока, если он попадает по противнику с более высоких мест, не наклоняя свой танк, тогда это считается читом. Хорошим примером являются карты Песочница/Гардер, на которых невозможно попасть в игрока, стоящего под стеной, не наклонив свой танк. Для такого вида чита лучше собрать несколько моментов. Этот вид чита приводит к блокировке аккаунта НАВСЕГДА.</p>
+                    <li class="font-bold text-sky-500">Игнор текстур</li>
+                    <p class="mt-3 text-gray-300">Чит, с помощью которого игрок проезжает сквозь танки, называется игнор текстур. В некоторых случаях бывает трудно определить, использует ли игрок читы или его пинг слишком высок, поэтому нам нужно собрать несколько моментов, прежде чем блокировать игрока.  За этот вид чита мы блокируем игрока на МЕСЯЦ!</p>
+                    <li class="font-bold text-sky-500">Чит на бесконечный балон/перезарядку</li>
+                    <p class="mt-3 text-gray-300">Этот чит в основном используется в паркурных боях. Его легко заметить, потому что игрок постоянно стреляет без перезарядки. За этот вид чита мы блокируем игрока НАВСЕГДА!</p>
+                    <li class="font-bold text-sky-500">Чит на гравитацию</li>
+                    <p class="mt-3 text-gray-300">Чит на гравитацию похож на Jump hack, но с небольшими отличиями. Он предполагает уменьшение или устранение эффекта гравитации, позволяя игроку прыгать выше, падать медленнее или даже летать. За этот вид чита мы блокируем игрока НАВСЕГДА.</p>
+                </ul>
+            </div>
+        </section>
+    </main>
+    <!-- Подвал сайта -->
+    <footer class="bg-gray-900 dark:bg-gray-800 text-white py-4">
+        <div class="container mx-auto px-4">
+            <p class="text-center">&copy; 2024 BM Helper. Все права защищены.</p>
+        </div>
+    </footer>
+    <!-- Кнопка "Вверх" -->
+    <button onclick="window.scrollTo(0, 0)" class="fixed bottom-4 right-4 bg-blue-500 text-white px-4 py-2 rounded-full shadow-md hover:bg-blue-600">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Скрипты -->
+    <script>
+        // Обработка смены языка
+        document.getElementById('languageSelect').addEventListener('change', function() {
+            var selectedLanguage = this.value;
+            if (selectedLanguage === 'en') {
+                window.location.href = 'en.html';
+            }
+        });
+
+        // Скрипт для открытия/закрытия гамбургер-меню
+        document.getElementById('burgerBtn').addEventListener('click', function() {
+            var mobileNav = document.getElementById('mobileNav');
+            mobileNav.classList.toggle('hidden');
+        });
+    </script>
+</body>
+
+</html>
