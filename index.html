@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +9,6 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="src/css/style.css">
 </head>
-
 <body class="flex flex-col min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-300">
     <!-- Шапка сайта -->
     <header class="bg-gray-900 dark:bg-gray-800 text-white py-4">
@@ -18,11 +16,8 @@
             <h1 class="text-3xl font-bold"><a href="#" class="hover:text-gray-300">BM Helper</a></h1>
             <!-- Выбор языка и темы -->
             <div class="flex h-full items-center">
-                <div class="ml-auto">
-                    <select id="languageSelect" class="bg-gray-700 text-white font-bold py-2 px-4 rounded">
-                        <option value="ru" selected>Русский</option>
-                        <option value="en">English</option>
-                    </select>
+                <div class="dropdown bg-gray-700 hover:bg-gray-600 text-white py-2 px-4 rounded text-center">
+                    <a href="en.html">🇬🇧 English</a>
                 </div>
             </div>
         </div>
@@ -36,7 +31,8 @@
                 <i class="fas fa-bars"></i>
             </button>
         </div>
-        <!-- Список ссылок для мобильных устройств -->
+    </nav>
+        <!-- Меню для мобильных устройств -->
         <div class="hidden" id="mobileNav">
             <a href="#commands-battle" class="block py-2 px-4 hover:bg-gray-600">Команды модератора битв</a>
             <a href="#commands-chat" class="block py-2 px-4 hover:bg-gray-600">Команды модератора чата</a>
@@ -45,35 +41,34 @@
             <a href="#" class="block py-2 px-4 hover:bg-gray-600">Логи</a>
             <a href="https://discordapp.com/users/645949087648186427/" class="block py-2 px-4 hover:bg-gray-600">Разработчик</a>
             <a href="https://discordapp.com/users/842037871309488178/" class="block py-2 px-4 hover:bg-gray-600">Администратор</a>
-        </div>
-    </nav>
-    <!-- Список ссылок для ПК -->
-    <nav class="bg-gray-700 text-white py-2 hidden md:block">
-        <div class="container mx-auto px-4 flex justify-center">
-            <div class="dropdown">
-                <a href="#" class="mr-6 hover:text-gray-300">Разделы</a>
-                <div class="dropdown-menu">
-                    <a href="#commands-battle">Команды модератора битв</a>
-                    <a href="#commands-chat">Команды модератора чата</a>
-                    <a href="#faq">FAQ</a>
+        </div>    
+        <!-- Меню для ПК -->
+        <nav class="bg-gray-700 text-white py-2 hidden md:block">
+            <div class="container mx-auto px-4 flex justify-center">
+                <div class="dropdown">
+                    <a href="#" class="mr-6 hover:text-gray-300">Разделы</a>
+                    <div class="dropdown-menu">
+                        <a href="#commands-battle">Команды модератора битв</a>
+                        <a href="#commands-chat">Команды модератора чата</a>
+                        <a href="#faq">FAQ</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a href="#" class="mr-6 hover:text-gray-300">Сервисы</a>
+                    <div class="dropdown-menu">
+                        <a href="templates/violation-phrase.html">Фразы</a>
+                        <a href="#">Логи</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a href="#" class="hover:text-gray-300">Контакты</a>
+                    <div class="dropdown-menu">
+                        <a href="https://discordapp.com/users/645949087648186427/">Разработчик</a>
+                        <a href="https://discordapp.com/users/842037871309488178/">Администратор</a>
+                    </div>
                 </div>
             </div>
-            <div class="dropdown">
-                <a href="#" class="mr-6 hover:text-gray-300">Сервисы</a>
-                <div class="dropdown-menu">
-                    <a href="templates/violation-phrase.html">Фразы</a>
-                    <a href="#">Логи</a>
-                </div>
-            </div>
-            <div class="dropdown">
-                <a href="#" class="hover:text-gray-300">Контакты</a>
-                <div class="dropdown-menu">
-                    <a href="https://discordapp.com/users/645949087648186427/">Разработчик</a>
-                    <a href="https://discordapp.com/users/842037871309488178/">Администратор</a>
-                </div>
-            </div>
-        </div>
-    </nav>
+        </nav>
     <!-- Основной контент страницы -->
     <main class="container mx-auto px-4 py-8 flex-grow">
         <section id="welcome" class="mb-8" style="height: 550px;">
@@ -349,23 +344,17 @@
     <button onclick="window.scrollTo(0, 0)" class="fixed bottom-4 right-4 bg-blue-500 text-white px-4 py-2 rounded-full shadow-md hover:bg-blue-600">
         <i class="fas fa-arrow-up"></i>
     </button>
-
     <!-- Скрипты -->
     <script>
-        // Обработка смены языка
-        document.getElementById('languageSelect').addEventListener('change', function() {
-            var selectedLanguage = this.value;
-            if (selectedLanguage === 'en') {
-                window.location.href = 'en.html';
-            }
-        });
-
         // Скрипт для открытия/закрытия гамбургер-меню
-        document.getElementById('burgerBtn').addEventListener('click', function() {
-            var mobileNav = document.getElementById('mobileNav');
-            mobileNav.classList.toggle('hidden');
+        document.addEventListener("DOMContentLoaded", function() {
+            const burgerBtn = document.getElementById('burgerBtn');
+            const mobileNav = document.getElementById('mobileNav');
+
+            burgerBtn.addEventListener('click', function() {
+                mobileNav.classList.toggle('hidden');
+            });
         });
     </script>
 </body>
-
 </html>
